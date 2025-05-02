@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
+const cors = require('cors');  // CORS 라이브러리 추가
 const app = express();
 
 const config = require("./server/config/keys");
@@ -9,9 +10,9 @@ const config = require("./server/config/keys");
 //   .then(() => console.log('MongoDB Connected...'))
 //   .catch(err => console.log(err));
 
+app.use(cors());  // CORS 미들웨어 추가: 모든 도메인에서 요청을 허용
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 
 app.use('/api/dialogflow', require('./server/routes/dialogflow'));
 
